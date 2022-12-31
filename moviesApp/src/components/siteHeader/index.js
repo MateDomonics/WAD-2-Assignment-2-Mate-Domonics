@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
@@ -11,12 +11,14 @@ import { useNavigate } from "react-router-dom";
 import { styled } from '@mui/material/styles';
 import { useTheme } from "@mui/material/styles";
 import useMediaQuery from "@mui/material/useMediaQuery";
+import { AuthContext } from "../../contexts/authContext";
 
 const Offset = styled('div')(({ theme }) => theme.mixins.toolbar);
 
 const SiteHeader = ({ history }) => {
     const [anchorEl, setAnchorEl] = useState(null);
     const open = Boolean(anchorEl);
+    const context = useContext(AuthContext)
 
     const theme = useTheme();
     const isMobile = useMediaQuery(theme.breakpoints.down("md"));
@@ -30,6 +32,7 @@ const SiteHeader = ({ history }) => {
         { label: "TV Series", path: "/tv" },
         { label: "Favourite Movies", path: "/movies/favourites" },
         { label: "Favourite TV Series", path: "/tv/favourites" },
+        { label: "Login", path: "/loginpage" },
     ];
 
     const handleMenuSelect = (pageURL) => {
@@ -47,9 +50,14 @@ const SiteHeader = ({ history }) => {
                     <Typography variant="h4" sx={{ flexGrow: 1 }}>
                         TMDB Client
                     </Typography>
-                    <Typography variant="h6" sx={{ flexGrow: 1 }}>
-                        All you ever wanted to know about Movies!
-                    </Typography>
+                    {context.isAuthenticated ? (
+                        <Typography variant="h6" sx={{ flexGrow: 1 }}>
+                        Welcome, {context.userName}
+                        </Typography>
+                        
+                    ):(<Typography variant="h6" sx={{ flexGrow: 1 }}>
+                        You are not logged in yet!
+                    </Typography>)}
                     {isMobile ? (
                         <>
                             <IconButton
