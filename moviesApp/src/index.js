@@ -19,6 +19,8 @@ import TVDetailsPage from "./pages/tvDetailsPage";
 import SimilarTVPage from "./pages/similarTVPage";
 import FavouriteTVSeriesPage from "./pages/favouriteTVSeriesPage";
 import TVReviewPage from "./pages/tvReviewPage";
+import LoginPage from "./pages/loginPage";
+import AuthContextProvider from "./contexts/authContext";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -34,6 +36,7 @@ const App = () => {
   return (
     <QueryClientProvider client={queryClient}>
       <BrowserRouter>
+      <AuthContextProvider>
         <SiteHeader />
         <MoviesContextProvider>
           <SeriesContextProvider>
@@ -52,9 +55,11 @@ const App = () => {
               <Route exact path="/tv/:id/similar" element={<SimilarTVPage />} />
               <Route exact path="/tv/favourites" element={<FavouriteTVSeriesPage />} />
               <Route exact path="/tv/reviews/:id" element={<TVReviewPage />} />
+              <Route exact path="/loginpage" element={<LoginPage />} />
             </Routes>
           </SeriesContextProvider>
         </MoviesContextProvider>
+        </AuthContextProvider>
       </BrowserRouter>
       <ReactQueryDevtools initialIsOpen={false} />
     </QueryClientProvider>
