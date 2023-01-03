@@ -54,7 +54,7 @@ If you have your API design on an online platform or graphic, please link to it 
 ## Security and Authentication
 Give details of authentication/ security implemented on the API(e.g. passport/sessions). Indicate which routes are protected. **REMEMBER: DON'T PUT YOUR OWN USERNAMES/PASSWORDS/AUTH KEYS IN THE README OR ON GITHUB**
 
-+ Users get a token when they register, which they use to access the website.
++ Users get a JSON Bearer Token when they register, which they use to access the website.
 ​
 ## Integrating with React App
 ​
