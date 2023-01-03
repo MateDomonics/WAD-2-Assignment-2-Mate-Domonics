@@ -11,14 +11,24 @@ const TemplateRegisterPage = props => {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [registered, setRegistered] = useState(false);
+    const [signedIn, setSignedIn] = useState(true);
 
     const register = () => {
         context.register(username, password);
         setRegistered(true)
     }
 
+    const logout = () => {
+        context.signout();
+        setSignedIn(false)
+    }
+
     if (registered === true) {
         return <Navigate to={"/loginpage"} />;
+    }
+
+    if (signedIn === false) {
+        return <Navigate to={"/"}/>;
     }
 
     return (
@@ -52,6 +62,14 @@ const TemplateRegisterPage = props => {
                 color = "info"
                 onClick={register}>
                     Register
+                </Button>
+            </Box>
+            <Box component="div" pt={2} sx={{ justifyContent: "center", display: "flex" }}>
+                <Button
+                variant = "contained"
+                color = "info"
+                onClick={logout}>
+                    Sign out
                 </Button>
             </Box>
         </>
