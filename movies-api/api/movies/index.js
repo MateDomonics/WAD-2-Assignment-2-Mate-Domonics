@@ -72,4 +72,13 @@ router.get('/tmdb/upcoming', asyncHandler(async (req, res) => {
     res.status(200).json(upcomingMovies);
 }));
 
+router.get('/tmdb/toprated', asyncHandler(async (req, res) => {
+    const topRatedMovies = await getTopRatedMovies();
+    res.status(200).json(topRatedMovies);
+}));
+
+router.get('/tmdb/tv', asyncHandler(async (req, res) => {
+    const tvSeries = await getTVSeries();
+    res.status(200).json(tvSeries);
+}));
 export default router;
